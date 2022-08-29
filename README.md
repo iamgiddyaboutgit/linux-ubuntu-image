@@ -5,4 +5,7 @@ This repository will house a useful Ubuntu image.  It will not actually hold the
 username: admin
 password: password
 
-docker build https://github.com/iamgiddyaboutgit/linux-ubuntu-image/tree/main/dockerfile-context
+After cloning this repo and setting it as your current working directory, run the following lines in Command Prompt or Shell with administrator privileges.
+
+docker build -t ubuntu .
+docker run -it ubuntu
