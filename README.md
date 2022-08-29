@@ -5,4 +5,4 @@ This repository will house a useful Ubuntu image.  It will not actually hold the
 username: admin
 password: password
 
-docker build https://github.com/iamgiddyaboutgit/linux-ubuntu-image
+docker build https://github.com/iamgiddyaboutgit/linux-ubuntu-image/tree/main/dockerfile-context
