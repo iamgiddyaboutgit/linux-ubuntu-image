@@ -4,7 +4,7 @@ RUN yes | unminimize
 RUN apt-get update
 RUN yes | apt-get upgrade
 RUN apt-get install sudo -y
-RUN apt-get intall vim -y
+RUN apt-get install vim -y
 RUN apt-get install curl -y
 RUN useradd --no-log-init --create-home --shell /bin/bash --gid sudo admin
 RUN echo 'admin:password' | chpasswd
