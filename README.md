@@ -8,4 +8,4 @@ password: password
 After cloning this repo and setting it as your current working directory, run the following lines in Command Prompt or Shell with administrator privileges.
 
 docker build -t ubuntu .
-docker run -it ubuntu
+docker run -v my-ubuntu-volume-data-store:/home/admin -it ubuntu
