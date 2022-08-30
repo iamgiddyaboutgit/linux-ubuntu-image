@@ -7,6 +7,8 @@ RUN apt-get install sudo -y
 RUN apt-get install vim -y
 RUN apt-get install curl -y
 RUN apt-get install man -y
+RUN apt-get install python3 -y
+RUN apt-get install wget -y
 
 RUN useradd --no-log-init --create-home --shell /bin/bash --gid sudo admin
 RUN echo 'admin:password' | chpasswd
