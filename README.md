@@ -7,9 +7,9 @@ username: admin
 password: password
 ```
 
-After cloning this repo and setting it as your current working directory, run the following lines in Command Prompt or Shell with administrator privileges.
+If you have not downloaded [Docker Desktop](https://www.docker.com/products/docker-desktop/), then do so now.  After cloning this repo and setting it as your current working directory, run the following lines in Command Prompt or Shell with administrator privileges.
 
-Build the image based on the Dockerfile.
+Build an image named ubuntu based on the Dockerfile.
 ```
 docker build -t ubuntu ./dockerfile-context
 ```
@@ -20,3 +20,5 @@ The command option --tty allocates a a pseudo-TTY in the container. For more inf
 ```
 docker run -v my-ubuntu-volume-data-store:/home/admin --interactive --tty ubuntu
 ```
+
+The docker [cp command](https://docs.docker.com/engine/reference/commandline/cp/) is useful for copying files/folders between a container and the local filesystem.
