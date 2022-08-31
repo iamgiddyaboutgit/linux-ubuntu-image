@@ -18,7 +18,7 @@ Run a container using the image you just built.  Setup the container so that dat
 The command option --tty allocates a a pseudo-TTY in the container. For more info see [link](https://qr.ae/pvgrUe) and [link](https://stackoverflow.com/a/59934555).  The command option --env-file allows a file of environment variables to be read in.
 
 ```
-docker run -v my-ubuntu-volume-data-store:/home/admin --interactive --tty --env-file ubuntu
+docker run -v my-ubuntu-volume-data-store:/home/admin --interactive --tty --env-file=./.env ubuntu
 ```
 
 The docker [cp command](https://docs.docker.com/engine/reference/commandline/cp/) is useful for copying files/folders between a container and the local filesystem.
