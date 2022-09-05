@@ -11,6 +11,7 @@ RUN apt-get install python3 -y
 RUN apt-get install wget -y
 RUN apt-get install less -y
 RUN apt-get install finger -y
+RUN apt-get install build-essential -y
 
 RUN useradd --no-log-init --create-home --shell /bin/bash --gid sudo admin
 RUN echo 'admin:password' | chpasswd
