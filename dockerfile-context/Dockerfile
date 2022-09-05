@@ -1,8 +1,8 @@
 # syntax=docker/dockerfile:1
 FROM ubuntu:latest
-RUN yes | unminimize
+RUN unminimize -y
 RUN apt-get update
-RUN yes | apt-get upgrade
+RUN apt-get upgrade -y
 RUN apt-get install sudo -y
 RUN apt-get install vim -y
 RUN apt-get install curl -y
@@ -17,4 +17,7 @@ RUN useradd --no-log-init --create-home --shell /bin/bash --gid sudo admin
 RUN echo 'admin:password' | chpasswd
 
 USER admin
+
+RUN mkdir $HOME/bin
+
 WORKDIR /home/admin
