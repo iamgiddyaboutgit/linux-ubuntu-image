@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 FROM ubuntu:latest
-RUN unminimize -y
+RUN yes | unminimize
 RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install sudo -y
