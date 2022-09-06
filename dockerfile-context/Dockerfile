@@ -21,7 +21,7 @@ USER admin
 WORKDIR /home/admin
 RUN mkdir $HOME/bin
 
-RUN echo -e '\n# I added this.  I hope it works! :)\nexport PS1='"'"'${debian_chroot:+($debian_chroot)}\\[\\033[01;32m\\]\\u@\\h\\[\\033[00m\\]:\\[\\033[01;34m\\]\\w\\[\\033[00m\\]\\$ '"'"'\nexport PATH='"'"'$HOME/bin${PATH:+:${PATH}}'"'"'\n' >> ./.bashrc 2>&1
+# RUN echo -e '\n# I added this.  I hope it works! :)\nexport PS1='"'"'${debian_chroot:+($debian_chroot)}\\[\\033[01;32m\\]\\u@\\h\\[\\033[00m\\]:\\[\\033[01;34m\\]\\w\\[\\033[00m\\]\\$ '"'"'\n' >> ./.bashrc 2>&1
 
 
 
