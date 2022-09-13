@@ -20,4 +20,8 @@ Run a container using the image you just built.  Setup the container so that dat
 docker run --mount 'type=volume,source=my-ubuntu-volume-data-store,destination=/home/admin' --interactive --tty --env-file=./.env ubuntu
 ```
 
-The docker [cp command](https://docs.docker.com/engine/reference/commandline/cp/) is useful for copying files/folders between a container and the local filesystem.
+The docker [cp command](https://docs.docker.com/engine/reference/commandline/cp/) is useful for copying files/folders between a container and the local filesystem.  You can also enter a container as root if necessary to change the permissions on a copied directory.
+
+```
+docker run --mount 'type=volume,source=my-ubuntu-volume-data-store,destination=/home/admin' --user root --interactive --tty --env-file=./.env ubuntu
+```
