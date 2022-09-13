@@ -13,7 +13,6 @@ RUN apt-get install wget -y
 RUN apt-get install less -y
 RUN apt-get install finger -y
 RUN apt-get install build-essential -y
-RUN apt-get install rsync -y # I may want to remove this later because it is hard to use.
 
 RUN useradd --no-log-init --create-home --shell /bin/bash --gid sudo admin
 RUN echo 'admin:password' | chpasswd
