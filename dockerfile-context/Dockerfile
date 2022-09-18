@@ -31,14 +31,13 @@ RUN wget -r --no-directories --random-wait --no-parent --accept-regex='.tar.bz2'
 RUN find -maxdepth 1 -name 'samtools*.tar.bz2' | xargs -I file_location tar --extract --file=file_location
 RUN rm *.tar.bz2
 
-WORKDIR /usr/bin/samtools*
-RUN ./configure
-RUN ./make
-RUN ./make install
+RUN /usr/bin/my-temp-dir/samtools*/configure & sleep 10
+RUN /usr/bin/my-temp-dir/samtools*/make
+RUN /usr/bin/my-temp-dir/samtools*/make install
 
 # Clean up after samtools install
-mv ./bin/* /usr/bin/
-rm -r /usr/bin/my-temp-dir
+RUN mv ./bin/* /usr/bin/
+RUN rm -r /usr/bin/my-temp-dir
 
 USER admin
 WORKDIR $HOME
