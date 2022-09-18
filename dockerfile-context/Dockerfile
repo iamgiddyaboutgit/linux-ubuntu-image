@@ -6,7 +6,7 @@ RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install sudo -y
 RUN apt-get install vim -y
-RUN apt-get install curl -y
+RUN apt-get install libcurl4-openssl-dev -y
 RUN apt-get install man -y
 RUN apt-get install python3 -y
 RUN apt-get install wget -y
@@ -23,29 +23,28 @@ RUN apt-get install libbz2-dev -y
 RUN useradd --no-log-init --create-home --shell /bin/bash --gid sudo admin
 RUN echo 'admin:password' | chpasswd
 
-RUN mkdir /usr/bin/my-temp-dir
-WORKDIR /usr/bin/my-temp-dir
+RUN mkdir /usr/local/bin/my-temp-dir
+WORKDIR /usr/local/bin/my-temp-dir
 
 # Install samtools
 RUN wget -r --no-directories --random-wait --no-parent --accept-regex='.tar.bz2' https://github.com/samtools/samtools/releases/latest
 RUN find -maxdepth 1 -name 'samtools*.tar.bz2' | xargs -I file_location tar --extract --file=file_location
 RUN rm *.tar.bz2
 
-RUN /usr/bin/my-temp-dir/samtools*/configure & sleep 10
-RUN /usr/bin/my-temp-dir/samtools*/make
-RUN /usr/bin/my-temp-dir/samtools*/make install
+RUN /usr/local/bin/my-temp-dir/samtools*/configure --prefix=/usr/local/bin/
+RUN cd /usr/local/bin/my-temp-dir/samtools* && make
+RUN cd /usr/local/bin/my-temp-dir/samtools* && make install
 
-# Clean up after samtools install
-RUN mv ./bin/* /usr/bin/
-RUN rm -r /usr/bin/my-temp-dir
+# Clean-up samtools
+WORKDIR /
+RUN rm -r /usr/local/bin/my-temp-dir
 
 USER admin
-WORKDIR $HOME
-
-RUN mkdir bin
+WORKDIR /home/admin
+RUN mkdir /home/admin/bin
 
 # Get color prompt
-RUN echo -e '\n# I added this.  I hope it works! :)\nexport PS1='"'"'${debian_chroot:+($debian_chroot)}\\[\\033[01;32m\\]\\u@\\h\\[\\033[00m\\]:\\[\\033[01;34m\\]\\w\\[\\033[00m\\]\\$ '"'"'\nexport PATH="$HOME/bin:$PATH"\n' >> ./.bashrc 2>&1
+RUN echo -e '\n# I added this.  I hope it works! :)\nexport PS1='"'"'${debian_chroot:+($debian_chroot)}\\[\\033[01;32m\\]\\u@\\h\\[\\033[00m\\]:\\[\\033[01;34m\\]\\w\\[\\033[00m\\]\\$ '"'"'\nexport PATH="$HOME/bin:$PATH"\n' >> $HOME/.bashrc 2>&1
 
 
 
