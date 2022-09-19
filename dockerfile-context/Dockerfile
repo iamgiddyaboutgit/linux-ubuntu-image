@@ -19,6 +19,7 @@ RUN apt-get install libncurses5-dev -y
 RUN apt-get install zlib1g-dev -y
 RUN apt-get install liblzma-dev -y
 RUN apt-get install libbz2-dev -y
+RUN apt-get install libssl-dev -y
 
 RUN useradd --no-log-init --create-home --shell /bin/bash --gid sudo admin
 RUN echo 'admin:password' | chpasswd
@@ -39,12 +40,15 @@ RUN cd /usr/local/bin/my-temp-dir/samtools* && make install
 WORKDIR /
 RUN rm -r /usr/local/bin/my-temp-dir
 
+# Install MySQL
+FROM mysql
+
 USER admin
 WORKDIR /home/admin
 RUN mkdir /home/admin/bin
 
 # Get color prompt
-RUN echo -e '\n# I added this.  I hope it works! :)\nexport PS1='"'"'${debian_chroot:+($debian_chroot)}\\[\\033[01;32m\\]\\u@\\h\\[\\033[00m\\]:\\[\\033[01;34m\\]\\w\\[\\033[00m\\]\\$ '"'"'\nexport PATH="$HOME/bin:$PATH"\n' >> $HOME/.bashrc 2>&1
+RUN echo -e '\n# I added this.  I hope it works! :)\nexport PS1='"'"'${debian_chroot:+($debian_chroot)}\\[\\033[01;32m\\]\\u@\\h\\[\\033[00m\\]:\\[\\033[01;34m\\]\\w\\[\\033[00m\\]\\$ '"'"'\nexport PATH="$HOME/bin:$PATH"\nexport MACHTYPE='x86_64'' >> $HOME/.bashrc 2>&1
 
 
 
