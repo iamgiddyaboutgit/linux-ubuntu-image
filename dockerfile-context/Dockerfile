@@ -40,9 +40,6 @@ RUN cd /usr/local/bin/my-temp-dir/samtools* && make install
 WORKDIR /
 RUN rm -r /usr/local/bin/my-temp-dir
 
-# Install MySQL
-FROM mysql
-
 USER admin
 WORKDIR /home/admin
 RUN mkdir /home/admin/bin
