@@ -21,6 +21,8 @@ RUN apt-get install liblzma-dev -y
 RUN apt-get install libbz2-dev -y
 RUN apt-get install libssl-dev -y
 
+RUN apt-get install libaio1 libaio-dev -y # for MySQL?
+
 RUN useradd --no-log-init --create-home --shell /bin/bash --gid sudo admin
 RUN echo 'admin:password' | chpasswd
 
@@ -39,6 +41,15 @@ RUN cd /usr/local/bin/my-temp-dir/samtools* && make install
 # Clean-up samtools
 WORKDIR /
 RUN rm -r /usr/local/bin/my-temp-dir
+
+# Try to install MySQL
+# https://dev.mysql.com/doc/refman/8.0/en/installing-source-distribution.html
+RUN mkdir /usr/local/bin/my-temp-dir
+WORKDIR /usr/local/bin/my-temp-dir
+RUN git clone https://github.com/mysql/mysql-server.git
+RUN apt-get -y install rpm
+RUN sudo groupadd mysql
+useradd --no-log-init -r -g mysql -s /bin/false mysql
 
 USER admin
 WORKDIR /home/admin
