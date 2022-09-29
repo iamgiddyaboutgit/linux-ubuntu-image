@@ -25,3 +25,9 @@ The docker [cp command](https://docs.docker.com/engine/reference/commandline/cp/
 ```
 docker run --mount 'type=volume,source=my-ubuntu-volume-data-store,destination=/home/admin' --user root --interactive --tty --env-file=./.env ubuntu
 ```
+
+It is also possible to restart a stopped container using a command like so:
+
+```
+docker exec -interactive --tty --env-file=./.env [container_name] /bin/bash
+```
