@@ -29,5 +29,5 @@ docker run --mount 'type=volume,source=my-ubuntu-volume-data-store,destination=/
 It is also possible to restart a stopped container using a command like so:
 
 ```
-docker exec -interactive --tty --env-file=./.env [container_name] /bin/bash
+docker exec --interactive --tty --env-file=./.env [container_name] /bin/bash
 ```
