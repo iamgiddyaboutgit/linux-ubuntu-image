@@ -20,16 +20,16 @@ Run a container using the image you just built.  Setup the container so that dat
 docker run --mount 'type=volume,source=my-ubuntu-volume-data-store,destination=/home/admin' --interactive --tty --env-file=./.env ubuntu
 ```
 
-The docker [cp command](https://docs.docker.com/engine/reference/commandline/cp/) is useful for copying files/folders between a container and the local filesystem.  You can also enter a container as root if necessary to change the permissions on a copied directory.
+The docker [cp command](https://docs.docker.com/engine/reference/commandline/cp/) is useful for copying files/folders between a container and the local filesystem.  After copying something, you can run the following to get the permissions working.  
 
 ```
 docker exec --user root --interactive --tty --env-file=./.env [container_name] chown admin: /home/admin/data
 ```
 
+You can also enter a container as root if necessary:
+
 ```
 docker run --mount 'type=volume,source=my-ubuntu-volume-data-store,destination=/home/admin' --user root --interactive --tty --env-file=./.env ubuntu
-
-chown admin: /home/admin/data
 ```
 
 It is also possible to restart a stopped container using a command like so:
