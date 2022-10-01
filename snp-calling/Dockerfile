@@ -10,6 +10,12 @@ RUN apt-get install -y openjdk-8-jdk
 RUN apt-get install -y wget
 RUN apt-get install -y bzip2
 RUN apt-get install cmake -y
+RUN apt-get install libncurses5-dev -y
+RUN apt-get install zlib1g-dev -y
+RUN apt-get install liblzma-dev -y
+RUN apt-get install libbz2-dev -y
+RUN apt-get install libssl-dev -y
+RUN apt-get install libcurl4-openssl-dev -y
 
 # Install samtools
 RUN mkdir /usr/local/bin/my-temp-dir
