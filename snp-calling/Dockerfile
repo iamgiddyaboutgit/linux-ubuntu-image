@@ -8,6 +8,7 @@ RUN apt-get install -y sudo
 RUN apt-get install -y vim 
 RUN apt-get install -y openjdk-8-jdk
 RUN apt-get install -y wget
+RUN apt-get install -y bzip2
 
 # Install samtools
 RUN wget -r --no-directories --random-wait --no-parent --accept-regex='.tar.bz2' https://github.com/samtools/samtools/releases/latest
