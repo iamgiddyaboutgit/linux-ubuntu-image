@@ -9,6 +9,7 @@ RUN apt-get install -y vim
 RUN apt-get install -y openjdk-8-jdk
 RUN apt-get install -y wget
 RUN apt-get install -y bzip2
+RUN apt-get install cmake -y
 
 # Install samtools
 RUN mkdir /usr/local/bin/my-temp-dir
