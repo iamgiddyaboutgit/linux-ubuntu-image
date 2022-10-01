@@ -11,6 +11,8 @@ RUN apt-get install -y wget
 RUN apt-get install -y bzip2
 
 # Install samtools
+RUN mkdir /usr/local/bin/my-temp-dir
+WORKDIR /usr/local/bin/my-temp-dir
 RUN wget -r --no-directories --random-wait --no-parent --accept-regex='.tar.bz2' https://github.com/samtools/samtools/releases/latest
 RUN find -maxdepth 1 -name 'samtools*.tar.bz2' | xargs -I file_location tar --extract --file=file_location
 RUN rm *.tar.bz2
