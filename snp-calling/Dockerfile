@@ -4,18 +4,26 @@ SHELL ["/bin/bash", "-c"]
 RUN yes | unminimize
 RUN apt-get update
 RUN apt-get upgrade -y 
+
+# for general stuff
 RUN apt-get install -y sudo
 RUN apt-get install -y vim 
+RUN apt-get install -y man
+RUN apt-get install -y less
+
+# for pipeline
 RUN apt-get install -y openjdk-8-jdk
+
+# for samtools
 RUN apt-get install -y wget
 RUN apt-get install -y bzip2
-RUN apt-get install cmake -y
-RUN apt-get install libncurses5-dev -y
-RUN apt-get install zlib1g-dev -y
-RUN apt-get install liblzma-dev -y
-RUN apt-get install libbz2-dev -y
-RUN apt-get install libssl-dev -y
-RUN apt-get install libcurl4-openssl-dev -y
+RUN apt-get install -y cmake
+RUN apt-get install -y libncurses5-dev
+RUN apt-get install -y zlib1g-dev
+RUN apt-get install -y liblzma-dev 
+RUN apt-get install -y libbz2-dev 
+RUN apt-get install -y libssl-dev
+RUN apt-get install -y libcurl4-openssl-dev 
 
 # Install samtools
 RUN mkdir /usr/local/bin/my-temp-dir
@@ -29,6 +37,14 @@ RUN cd /usr/local/bin/my-temp-dir/samtools* && make
 RUN cd /usr/local/bin/my-temp-dir/samtools* && make install
 
 # Clean-up samtools
+WORKDIR /
+RUN rm -r /usr/local/bin/my-temp-dir
+
+# Install bwakit-0.7.15 (Burrows-Wheeler Aligner)
+RUN mkdir /usr/local/bin/my-temp-dir
+WORKDIR /usr/local/bin/my-temp-dir
+RUN wget --random-wait https://sourceforge.net/projects/bio-bwa/files/bwakit/bwakit-0.7.15_x64-linux.tar.bz2/download
+RUN mkdir /usr/local/bin/bwa.kit && tar --extract --file=./download --directory=/usr/local/bin/bwa.kit --strip-components=1
 WORKDIR /
 RUN rm -r /usr/local/bin/my-temp-dir
 
@@ -47,3 +63,4 @@ RUN echo -e '\n# I added this.  I hope it works! :)\nexport PS1='"'"'${debian_ch
 RUN echo -e '\nexport PATH="$HOME/bin:$PATH"' >> $HOME/.bashrc 2>&1
 RUN echo -e '\nexport JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64' >> $HOME/.bashrc 2>&1
 RUN echo -e '\nexport PATH=$PATH:$JAVA_HOME/bin' >> $HOME/.bashrc 2>&1
+RUN echo -e '\nexport PATH=$PATH:/usr/local/bin/bwa.kit' >> $HOME/.bashrc 2>&1
