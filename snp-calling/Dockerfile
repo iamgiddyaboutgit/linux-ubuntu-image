@@ -43,10 +43,16 @@ RUN rm -r /usr/local/bin/my-temp-dir
 # Install bwakit-0.7.15 (Burrows-Wheeler Aligner)
 RUN mkdir /usr/local/bin/my-temp-dir
 WORKDIR /usr/local/bin/my-temp-dir
-RUN wget --random-wait https://sourceforge.net/projects/bio-bwa/files/bwakit/bwakit-0.7.15_x64-linux.tar.bz2/download
+RUN wget --random-wait -O download https://sourceforge.net/projects/bio-bwa/files/bwakit/bwakit-0.7.15_x64-linux.tar.bz2/download
 RUN mkdir /usr/local/bin/bwa.kit && tar --extract --file=./download --directory=/usr/local/bin/bwa.kit --strip-components=1
 WORKDIR /
 RUN rm -r /usr/local/bin/my-temp-dir
+
+# Install Genome Analysis Toolkit (GATK)
+RUN mkdir /usr/local/bin/my-temp-dir
+WORKDIR /usr/local/bin/my-temp-dir
+RUN wget --random-wait -O gatk.tar.bz2 https://storage.googleapis.com/gatk-software/package-archive/gatk/GenomeAnalysisTK-3.7-0-gcfedb67.tar.bz2
+RUN mkdir /usr/local/bin/gatk && tar --extract --file=./gatk.tar.bz2 --directory=/usr/local/bin/gatk
 
 # User stuff
 RUN useradd --no-log-init --create-home --shell /bin/bash --gid sudo admin
