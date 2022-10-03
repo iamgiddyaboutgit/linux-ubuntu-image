@@ -47,15 +47,7 @@ RUN rm -r /usr/local/bin/my-temp-dir
 RUN mkdir /usr/local/bin/my-temp-dir
 WORKDIR /usr/local/bin/my-temp-dir
 RUN wget --random-wait -O download https://sourceforge.net/projects/bio-bwa/files/bwakit/bwakit-0.7.15_x64-linux.tar.bz2/download
-RUN mkdir /usr/local/bin/bwa.kit && tar --extract --file=./download --directory=/usr/local/bin/bwa.kit --strip-components=1
-WORKDIR /
-RUN rm -r /usr/local/bin/my-temp-dir
-
-# Install Genome Analysis Toolkit (GATK)
-RUN mkdir /usr/local/bin/my-temp-dir
-WORKDIR /usr/local/bin/my-temp-dir
-RUN wget --random-wait -O gatk.tar.bz2 https://storage.googleapis.com/gatk-software/package-archive/gatk/GenomeAnalysisTK-3.7-0-gcfedb67.tar.bz2
-RUN mkdir /usr/local/bin/gatk && tar --extract --file=./gatk.tar.bz2 --directory=/usr/local/bin/gatk
+RUN tar --extract --file=./download --directory=/usr/local/bin/bwa.kit --strip-components=1
 WORKDIR /
 RUN rm -r /usr/local/bin/my-temp-dir
 
@@ -67,6 +59,13 @@ USER admin
 WORKDIR /home/admin
 RUN mkdir /home/admin/bin
 
+# Install Genome Analysis Toolkit (GATK)
+RUN mkdir /home/admin/bin/my-temp-dir
+WORKDIR /home/admin/bin/my-temp-dir
+RUN wget --random-wait -O gatk.tar.bz2 https://storage.googleapis.com/gatk-software/package-archive/gatk/GenomeAnalysisTK-3.7-0-gcfedb67.tar.bz2
+RUN mkdir /home/admin/bin/gatk && tar --extract --file=/home/admin/bin/my-temp-dir/gatk.tar.bz2 --directory=/home/admin/bin/gatk
+WORKDIR /home/admin
+RUN rm -r /home/admin/bin/my-temp-dir
 
 # Get color prompt
 RUN echo -e '\n# I added this.  I hope it works! :)\nexport PS1='"'"'${debian_chroot:+($debian_chroot)}\\[\\033[01;32m\\]\\u@\\h\\[\\033[00m\\]:\\[\\033[01;34m\\]\\w\\[\\033[00m\\]\\$ '"'"'' >> $HOME/.bashrc 2>&1
