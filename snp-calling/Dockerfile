@@ -50,13 +50,14 @@ RUN wget --random-wait -O download https://sourceforge.net/projects/bio-bwa/file
 RUN mkdir /usr/local/bin/bwa.kit && tar --extract --file=./download --directory=/usr/local/bin/bwa.kit --strip-components=1
 WORKDIR /
 RUN rm -r /usr/local/bin/my-temp-dir
-RUN echo -e '\nexport PATH=$PATH:/usr/local/bin/bwa.kit' >> $HOME/.bashrc 2>&1
 
 # Install Genome Analysis Toolkit (GATK)
 RUN mkdir /usr/local/bin/my-temp-dir
 WORKDIR /usr/local/bin/my-temp-dir
 RUN wget --random-wait -O gatk.tar.bz2 https://storage.googleapis.com/gatk-software/package-archive/gatk/GenomeAnalysisTK-3.7-0-gcfedb67.tar.bz2
 RUN mkdir /usr/local/bin/gatk && tar --extract --file=./gatk.tar.bz2 --directory=/usr/local/bin/gatk
+WORKDIR /
+RUN rm -r /usr/local/bin/my-temp-dir
 
 # User stuff
 RUN useradd --no-log-init --create-home --shell /bin/bash --gid sudo admin
@@ -65,12 +66,13 @@ RUN echo 'admin:password' | chpasswd
 USER admin
 WORKDIR /home/admin
 RUN mkdir /home/admin/bin
-RUN echo -e '\nexport PATH="$HOME/bin:$PATH"' >> $HOME/.bashrc 2>&1
+
 
 # Get color prompt
 RUN echo -e '\n# I added this.  I hope it works! :)\nexport PS1='"'"'${debian_chroot:+($debian_chroot)}\\[\\033[01;32m\\]\\u@\\h\\[\\033[00m\\]:\\[\\033[01;34m\\]\\w\\[\\033[00m\\]\\$ '"'"'' >> $HOME/.bashrc 2>&1
 
-
-
-
+# Environmental variables
+RUN echo -e '\nexport PATH=$PATH:/usr/local/bin/bwa.kit' >> $HOME/.bashrc 2>&1
+RUN echo -e '\nexport PATH=$PATH:/usr/local/bin/gatk' >> $HOME/.bashrc 2>&1
+RUN echo -e '\nexport PATH="$HOME/bin:$PATH"' >> $HOME/.bashrc 2>&1
 
