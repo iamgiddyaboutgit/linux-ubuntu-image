@@ -43,11 +43,25 @@ RUN cd /usr/local/bin/my-temp-dir/samtools* && make install
 WORKDIR /
 RUN rm -r /usr/local/bin/my-temp-dir
 
+# Install BCFtools
+RUN mkdir /usr/local/bin/my-temp-dir
+WORKDIR /usr/local/bin/my-temp-dir
+RUN wget -r --no-directories --random-wait --no-parent --accept-regex='.tar.bz2' https://github.com/samtools/bcftools/releases/latest
+RUN find -maxdepth 1 -name 'bcftools*.tar.bz2' | xargs -I file_location tar --extract --file=file_location
+RUN rm *.tar.bz2
+
+RUN /usr/local/bin/my-temp-dir/bcftools*/configure --prefix=/usr/local/bin/
+RUN cd /usr/local/bin/my-temp-dir/bcftools* && make
+RUN cd /usr/local/bin/my-temp-dir/bcftools* && make install
+
+WORKDIR /
+RUN rm -r /usr/local/bin/my-temp-dir
+
 # Install bwakit-0.7.15 (Burrows-Wheeler Aligner)
 RUN mkdir /usr/local/bin/my-temp-dir
 WORKDIR /usr/local/bin/my-temp-dir
 RUN wget --random-wait -O download https://sourceforge.net/projects/bio-bwa/files/bwakit/bwakit-0.7.15_x64-linux.tar.bz2/download
-RUN tar --extract --file=./download --directory=/usr/local/bin/bwa.kit --strip-components=1
+RUN tar --extract --file=/usr/local/bin/my-temp-dir/download --directory=/usr/local/bin
 WORKDIR /
 RUN rm -r /usr/local/bin/my-temp-dir
 
