@@ -50,5 +50,5 @@ It is also possible to restart a stopped container using a command like so:
 
 ```
 docker start [container name]
-docker exec --interactive --tty --env-file=./.env [container_name] /bin/bash
+docker exec --interactive --tty [container_name] /bin/bash
 ```
