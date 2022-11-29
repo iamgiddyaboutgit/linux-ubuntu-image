@@ -11,7 +11,7 @@ If you have not downloaded [Docker Desktop](https://www.docker.com/products/dock
 
 Build an image named snp-calling based on your chosen Dockerfile. Update this to reflect your Dockerfile location.
 ```
-docker build -t snp-calling . -f "C:\Users\...\Dockerfile"
+docker build -t snp-calling --no-cache . -f "C:\Users\...\Dockerfile"
 ```
 
 Run a container using the image you just built.  Setup the container so that data in the container's directory (/home/admin) is persisted in a named volume (my-ubuntu-volume-data-store) on the host.  Note that the command option --interactive keeps STDIN open.  The command option --tty allocates a a pseudo-TTY in the container. For more info see [link](https://qr.ae/pvgrUe) and [link](https://stackoverflow.com/a/59934555).  The command option --env-file allows a file of environment variables to be read in.

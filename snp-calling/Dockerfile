@@ -78,8 +78,10 @@ RUN mkdir /home/admin/bin/my-temp-dir
 WORKDIR /home/admin/bin/my-temp-dir
 RUN wget --random-wait -O gatk.tar.bz2 https://storage.googleapis.com/gatk-software/package-archive/gatk/GenomeAnalysisTK-3.7-0-gcfedb67.tar.bz2
 RUN mkdir /home/admin/bin/gatk && tar --extract --file=/home/admin/bin/my-temp-dir/gatk.tar.bz2 --directory=/home/admin/bin/gatk
-WORKDIR /home/admin
 RUN rm -r /home/admin/bin/my-temp-dir
+
+# Go back to right directory
+WORKDIR /home/admin
 
 # Get color prompt
 RUN echo -e '\n# I added this.  I hope it works! :)\nexport PS1='"'"'${debian_chroot:+($debian_chroot)}\\[\\033[01;32m\\]\\u@\\h\\[\\033[00m\\]:\\[\\033[01;34m\\]\\w\\[\\033[00m\\]\\$ '"'"'' >> $HOME/.bashrc 2>&1
