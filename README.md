@@ -34,10 +34,10 @@ Copy files from container to local path:
 docker cp CONTAINER:/var/logs/ /tmp/app_logs
 ```
 
-After copying something, you can run the following to get the permissions working.  
+After copying something, you can run the following within the container to get the permissions working.  
 
 ```
-docker exec --user root --interactive --tty [container_name] chown --recursive admin: /home/admin/data
+sudo chown --recursive admin: /home/admin/data
 ```
 
 You can also enter a container as root if necessary:
