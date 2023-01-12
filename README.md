@@ -40,6 +40,12 @@ After copying something, you can run the following within the container to get t
 sudo chown --recursive admin: /home/admin/data
 ```
 
+A similar task of changing ownership to get permissions working can be accomplished using:
+
+```
+docker exec --user root CONTAINER /bin/bash -c "chown --recursive admin: /home/admin/data"
+```
+
 You can also enter a container as root if necessary:
 
 ```
