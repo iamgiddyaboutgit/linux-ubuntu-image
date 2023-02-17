@@ -20,6 +20,12 @@ Run a container using the image you just built.  Setup the container so that dat
 docker run --mount 'type=volume,source=my-ubuntu-volume-data-store,destination=/home/admin' --interactive --tty --env-file=./.env ubuntu
 ```
 
+After exiting a container, you can get back in via
+
+```
+docker exec --user admin --tty --interactive [CONTAINER_NAME] /bin/bash
+```
+
 The docker [cp command](https://docs.docker.com/engine/reference/commandline/cp/) is useful for copying files/folders between a container and the local filesystem.  
 
 Copy a local file into container:
